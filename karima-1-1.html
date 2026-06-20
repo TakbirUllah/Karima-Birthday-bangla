@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>শুভ জন্মদিন, করিমা 🌹</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&family=Hind+Siliguri:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --blush:  #F2C4CE;
+    --rose:   #C9637A;
+    --deep:   #7B2D3E;
+    --ink:    #1E1220;
+    --gold:   #C9A96E;
+    --cream:  #FDF6F0;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'Hind Siliguri', 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  #petals {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    z-index: 1;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 60%, rgba(201,99,122,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-weight: 200;
+    font-size: clamp(0.65rem, 1.5vw, 0.8rem);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.8rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.3s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(4.5rem, 14vw, 11rem);
+    line-height: 0.9;
+    color: var(--blush);
+    opacity: 0;
+    animation: fadeUp 1.1s 0.5s forwards;
+  }
+  .hero-name span { color: var(--rose); }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: var(--gold);
+    margin-top: 1.4rem;
+    opacity: 0;
+    animation: fadeUp 1.1s 0.8s forwards;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(242,196,206,0.4);
+    opacity: 0;
+    animation: fadeUp 1s 1.5s forwards;
+  }
+  .scroll-hint::after {
+    content: '';
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(242,196,206,0.4), transparent);
+    animation: scrollLine 1.6s ease-in-out infinite;
+  }
+  @keyframes scrollLine {
+    0%,100% { transform: scaleY(1); opacity:1; }
+    50%      { transform: scaleY(0.4); opacity:0.2; }
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 7rem 2rem;
+  }
+  section + section { border-top: 1px solid rgba(201,99,122,0.12); }
+
+  .section-label {
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--rose);
+    margin-bottom: 2rem;
+  }
+
+  .wish-text {
+    font-family: 'Hind Siliguri', sans-serif;
+    font-weight: 300;
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    line-height: 1.8;
+    color: var(--blush);
+  }
+  .wish-text em { color: var(--gold); font-style: normal; }
+
+  /* ── THINGS ── */
+  .things { display: grid; gap: 2rem; margin-top: 2rem; }
+  .thing {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    gap: 1.2rem;
+    align-items: start;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+  .thing.visible { opacity: 1; transform: none; }
+  .thing-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    color: var(--rose);
+    line-height: 1;
+  }
+  .thing-body strong {
+    display: block;
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--blush);
+    margin-bottom: 0.3rem;
+    font-family: 'Hind Siliguri', sans-serif;
+  }
+  .thing-body p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: rgba(253,230,238,0.6);
+    font-family: 'Hind Siliguri', sans-serif;
+  }
+
+  /* ── POEM ── */
+  .poem {
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: clamp(1rem, 2.2vw, 1.2rem);
+    line-height: 2.2;
+    color: var(--blush);
+    text-align: center;
+    padding: 3rem 2rem;
+    font-weight: 300;
+  }
+  .poem::before, .poem::after {
+    content: '✦';
+    display: block;
+    color: var(--gold);
+    font-size: 0.65rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1rem;
+  }
+  .poem::after { margin-top: 1.5rem; margin-bottom: 0; }
+
+  /* ── FINAL ── */
+  .final { text-align: center; padding-bottom: 5rem; }
+  .final-big {
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
+    font-weight: 300;
+    color: var(--blush);
+    line-height: 1.4;
+  }
+  .final-big strong { color: var(--rose); font-weight: 500; }
+  .final-note {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: rgba(253,230,238,0.45);
+    line-height: 2;
+    font-family: 'Hind Siliguri', sans-serif;
+  }
+
+  /* ── CLICKABLE HEARTS ── */
+  .hearts-wrap {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-top: 2.8rem;
+  }
+  .hrt-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 2rem;
+    line-height: 1;
+    position: relative;
+    transition: transform 0.15s;
+    filter: drop-shadow(0 0 6px rgba(201,99,122,0.4));
+    animation: heartbeat 1.6s ease-in-out infinite;
+  }
+  .hrt-btn:nth-child(2) { animation-delay: 0.25s; font-size: 2.5rem; }
+  .hrt-btn:nth-child(3) { animation-delay: 0.5s;  font-size: 1.7rem; }
+  .hrt-btn:active { transform: scale(0.85); }
+  .hrt-btn.clicked { animation: heartSuck 0.55s forwards; }
+  @keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    50%      { transform: scale(1.2); }
+  }
+  @keyframes heartSuck {
+    0%   { transform: scale(1);   opacity: 1; }
+    40%  { transform: scale(1.4); opacity: 1; }
+    100% { transform: scale(0);   opacity: 0; }
+  }
+
+  .hint-tap {
+    margin-top: 1rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: rgba(242,196,206,0.3);
+    font-family: 'Hind Siliguri', sans-serif;
+  }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(18, 8, 14, 0.0);
+    pointer-events: none;
+    transition: background 0.5s;
+  }
+  .modal-overlay.open {
+    background: rgba(18, 8, 14, 0.92);
+    pointer-events: all;
+  }
+  .modal-box {
+    position: relative;
+    max-width: 480px;
+    width: 90%;
+    background: linear-gradient(145deg, #2c1228, #1a0d18);
+    border: 1px solid rgba(201,99,122,0.25);
+    border-radius: 2px;
+    padding: 3.5rem 2.5rem;
+    text-align: center;
+    transform: scale(0.6) translateY(40px);
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1), opacity 0.4s;
+  }
+  .modal-overlay.open .modal-box {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+  .modal-stars {
+    font-size: 1.4rem;
+    letter-spacing: 0.5rem;
+    margin-bottom: 1.6rem;
+    display: block;
+    animation: starSpin 4s linear infinite;
+  }
+  @keyframes starSpin {
+    0%   { letter-spacing: 0.5rem; }
+    50%  { letter-spacing: 1.2rem; }
+    100% { letter-spacing: 0.5rem; }
+  }
+  .modal-msg {
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: clamp(1.1rem, 3vw, 1.45rem);
+    color: var(--blush);
+    line-height: 1.9;
+    margin-bottom: 0.8rem;
+    white-space: pre-line;
+  }
+  .modal-sub {
+    font-size: 0.82rem;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    font-family: 'Hind Siliguri', sans-serif;
+  }
+  .modal-close {
+    margin-top: 2.2rem;
+    background: none;
+    border: 1px solid rgba(201,99,122,0.35);
+    color: rgba(242,196,206,0.6);
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    padding: 0.7rem 1.8rem;
+    cursor: pointer;
+    border-radius: 1px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .modal-close:hover { border-color: var(--rose); color: var(--blush); }
+
+  .burst-heart {
+    position: fixed;
+    font-size: 1.2rem;
+    pointer-events: none;
+    z-index: 110;
+    animation: burstFly 1.1s ease-out forwards;
+  }
+  @keyframes burstFly {
+    0%   { transform: translate(0,0) scale(1); opacity: 1; }
+    100% { transform: translate(var(--tx), var(--ty)) scale(0.3); opacity: 0; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .hero-name, .eyebrow, .hero-sub, .scroll-hint { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="petals"></canvas>
+
+<!-- HERO — English, untouched -->
+<div class="hero">
+  <p class="eyebrow">A birthday surprise for</p>
+  <h1 class="hero-name">Ka<span>r</span>ima</h1>
+  <p class="hero-sub">On this beautiful day you were born into the world 🌹</p>
+  <div class="scroll-hint">scroll</div>
+</div>
+
+<!-- BIRTHDAY WISH — Bangla -->
+<section>
+  <p class="section-label reveal">জন্মদিনের শুভেচ্ছা</p>
+  <p class="wish-text reveal">
+    শুভ জন্মদিন, <em>করিমা।</em><br><br>
+    আজকের দিনটা পুরোপুরি তোমার — রোদের উষ্ণতা, বাতাসের নরম ছোঁয়া, 
+    কারণ ছাড়াই মনে আসা ভালো লাগাগুলো — সব কিছু। 
+    তুমি যেভাবে মানুষকে অনুভব করাও, আজ তুমি নিজেও ঠিক সেটুকু পাওয়ার যোগ্য।
+  </p>
+</section>
+
+<!-- THINGS — Bangla -->
+<section>
+  <p class="section-label reveal">যা না বললেই নয়</p>
+  <div class="things">
+    <div class="thing">
+      <span class="thing-num">I</span>
+      <div class="thing-body">
+        <strong>তোমার নিজেকে বহন করার ধরনটা</strong>
+        <p>তোমার মধ্যে একটা শান্ত আত্মবিশ্বাস আছে যেটা চোখে পড়ার মতো। তুমি মনোযোগ চাও না — কিন্তু পেয়ে যাও।</p>
+      </div>
+    </div>
+    <div class="thing">
+      <span class="thing-num">II</span>
+      <div class="thing-body">
+        <strong>তোমার সত্যিকারের রূপ</strong>
+        <p>তুমি নিজেই থাকো, পুরোপুরি। এটা যতটা সহজ শোনায়, আসলে ততটা না। এটাই প্রথম যা আমার চোখে পড়েছিল।</p>
+      </div>
+    </div>
+    <div class="thing">
+      <span class="thing-num">III</span>
+      <div class="thing-body">
+        <strong>তোমার হাসি</strong>
+        <p>যখন সত্যিই কিছু মজার হয় তখনই হাসো — সেটা জোর করা না। তাই ওই হাসির একটা আলাদা মানে আছে।</p>
+      </div>
+    </div>
+    <div class="thing">
+      <span class="thing-num">IV</span>
+      <div class="thing-body">
+        <strong>মানুষকে দেখতে পাওয়ার ক্ষমতা</strong>
+        <p>তুমি যখন কথা শোনো, মনে হয় সেটা সত্যিই গুরুত্ব দিয়ে শুনছ। এটা একটা বিরল গুণ, যেটা অনেকে টের পায় না।</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POEM — Bangla -->
+<section style="padding: 5rem 2rem;">
+  <div class="poem reveal">
+    সব কিছুর নাম দিতে হয় না সত্যি হওয়ার জন্য —<br>
+    কিছু অনুভূতি শুধু থাকে, চুপচাপ।<br><br>
+    আজকের দিনটা তোমার, করিমা।<br>
+    যে তুমি ক্লান্ত হয়েও এগিয়ে যাও তার জন্য,<br>
+    যে তুমি না ভেবেই হেসে ফেলো তার জন্য,<br>
+    আর যে তোমাকে এখনও চেনা হয়নি তার জন্যও।<br><br>
+    তুমি আছ বলে ভালো লাগে।
+  </div>
+</section>
+
+<!-- FINAL — Bangla -->
+<section class="final">
+  <div class="final-big reveal">
+    <strong>তোমার জন্য,</strong><br>
+    আজ এবং এরপরের প্রতিটা দিন।
+  </div>
+  <p class="final-note reveal">
+    এই বছরটা যেন ভরে থাকে ভালো চমকে,<br>
+    পাশে থাকা মানুষে, আর সেই মুহূর্তগুলোতে<br>
+    যখন মনে হয় — হ্যাঁ, এটাই চেয়েছিলাম।<br><br>
+    শুভ জন্মদিন, করিমা। 🌹
+  </p>
+  <div class="hearts-wrap reveal">
+    <button class="hrt-btn" aria-label="চাপো">🌸</button>
+    <button class="hrt-btn" aria-label="চাপো">💗</button>
+    <button class="hrt-btn" aria-label="চাপো">✨</button>
+  </div>
+  <p class="hint-tap reveal">↑ &nbsp; একটা চাপো &nbsp; ↑</p>
+</section>
+
+<!-- MODAL — Bangla -->
+<div class="modal-overlay" id="modal" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <span class="modal-stars">🌸 ✨ 🌹 ✨ 🌸</span>
+    <p class="modal-msg" id="modal-msg"></p>
+    <p class="modal-sub" id="modal-sub"></p>
+    <button class="modal-close" id="modal-close">বন্ধ করো ✕</button>
+  </div>
+</div>
+
+<script>
+/* ── FLOATING PETALS ── */
+const canvas = document.getElementById('petals');
+const ctx = canvas.getContext('2d');
+let W, H, petals = [];
+
+function resize() { W = canvas.width = innerWidth; H = canvas.height = innerHeight; }
+resize();
+window.addEventListener('resize', resize);
+
+const COLS = ['rgba(242,196,206,','rgba(201,99,122,','rgba(201,169,110,'];
+
+function Petal() {
+  this.reset = () => {
+    this.x = Math.random() * W;
+    this.y = -20;
+    this.r = 3 + Math.random() * 5;
+    this.speed = 0.5 + Math.random() * 1;
+    this.drift = (Math.random() - 0.5) * 0.5;
+    this.angle = Math.random() * Math.PI * 2;
+    this.spin  = (Math.random() - 0.5) * 0.025;
+    this.alpha = 0.12 + Math.random() * 0.4;
+    this.col   = COLS[Math.floor(Math.random() * COLS.length)];
+  };
+  this.reset();
+  this.y = Math.random() * H;
+}
+for (let i = 0; i < 50; i++) petals.push(new Petal());
+
+(function draw() {
+  ctx.clearRect(0, 0, W, H);
+  petals.forEach(p => {
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.angle);
+    ctx.beginPath();
+    ctx.ellipse(0, 0, p.r, p.r * 1.6, 0, 0, Math.PI * 2);
+    ctx.fillStyle = p.col + p.alpha + ')';
+    ctx.fill();
+    ctx.restore();
+    p.y += p.speed; p.x += p.drift + Math.sin(p.y * 0.01) * 0.4; p.angle += p.spin;
+    if (p.y > H + 20) p.reset();
+  });
+  requestAnimationFrame(draw);
+})();
+
+/* ── SCROLL REVEAL ── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal, .thing').forEach(el => obs.observe(el));
+
+/* ── HEART SURPRISES — Bangla ── */
+const messages = [
+  {
+    msg: "এই মহাবিশ্ব সেদিন একটা ভালো কাজ করেছিল\nযেদিন তোমাকে তৈরি করেছিল।",
+    sub: "শুভ জন্মদিন, করিমা 🌹"
+  },
+  {
+    msg: "তোমার সাথে পথ পড়েছে বলে\nনিজেকে ভাগ্যবান মনে হয়।\nসত্যিই।",
+    sub: "এই বছরটা তোমার সেরা হোক ✨"
+  },
+  {
+    msg: "আজকের দিনটা যেন অনুভব হয়\nসবচেয়ে উষ্ণ, নরম আর সোনালি\nএকটা মুহূর্তের মতো।",
+    sub: "এটা তোমার দিন। উপভোগ করো। 🌸"
+  }
+];
+
+let msgIdx = 0;
+const modal     = document.getElementById('modal');
+const modalMsg  = document.getElementById('modal-msg');
+const modalSub  = document.getElementById('modal-sub');
+const modalClose = document.getElementById('modal-close');
+
+function spawnBurstHearts(x, y) {
+  const emojis = ['💗','🌸','✨','💫','🌹','💕'];
+  for (let i = 0; i < 10; i++) {
+    const el = document.createElement('span');
+    el.className = 'burst-heart';
+    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    const angle = Math.random() * Math.PI * 2;
+    const dist  = 80 + Math.random() * 120;
+    el.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
+    el.style.setProperty('--ty', Math.sin(angle) * dist + 'px');
+    el.style.left = x + 'px';
+    el.style.top  = y + 'px';
+    el.style.animationDelay = (Math.random() * 0.2) + 's';
+    document.body.appendChild(el);
+    el.addEventListener('animationend', () => el.remove());
+  }
+}
+
+document.querySelectorAll('.hrt-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    if (this.classList.contains('clicked')) return;
+    this.classList.add('clicked');
+    const rect = this.getBoundingClientRect();
+    spawnBurstHearts(rect.left + rect.width / 2, rect.top + rect.height / 2);
+    const m = messages[msgIdx % messages.length];
+    msgIdx++;
+    modalMsg.textContent = m.msg;
+    modalSub.textContent = m.sub;
+    setTimeout(() => modal.classList.add('open'), 350);
+  });
+});
+
+modalClose.addEventListener('click', () => modal.classList.remove('open'));
+modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('open'); });
+</script>
+</body>
+</html>
